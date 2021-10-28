@@ -26,4 +26,7 @@ class BodyController extends Controller
     public function test(){
         return view('test');
     }
+    public function kansariwayat(){
+        return view ('kansariwayat');
+    }
 }

@@ -23,6 +23,7 @@ Route::get('/transaksi',[BodyController::class, 'kansatransaksi']);
 Route::get('/bkasir',[BodyController::class, 'kansaberandakasir']);
 Route::get('/transaksi2',[BodyController::class, 'kansatransaksi2']);
 Route::get('/test',[BodyController::class, 'test']);
+Route::get('/riwayat',[BodyController::class,'kansariwayat']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
