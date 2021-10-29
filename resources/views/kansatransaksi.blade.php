@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1c604228ee.js" crossorigin="anonymous"></script>
 
     <title>Sistem Transaksi</title>
   </head>
@@ -34,7 +35,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                         <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
-                        <li><a class="dropdown-item" href="#">Keluar</a></li>
+                        <li><a class="dropdown-item" href="/login">Keluar</a></li>
                         </ul>
                     </li>
                     </ul>
@@ -44,124 +45,103 @@
         </nav>
     <!--akhir navbar-->
 
-    <!--dropdown-->
-    <div class="dropdown" style="width: 50rem;
-        position: absolute;
-        left: 50%;
-        top: 23%;
-        transform: translate(-50%, -50%);">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" >
-            Weekday
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item" href="/transaksi2">Weekend</a></li>
-        </ul>
-    </div>
-
-    <div class="card" >
-        <div class="card-body">
-            <div class="mb-3">
-                
-                <div class="quantity">
-                    <label class="form-label" style="font-size:20pt">Masukkan Jumlah Tiket</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="button btn-minus disabled" type="button">-</button>
-                    <input class="input" type="text" id="quantity" readonly="" value="1">
-                    <button class="button btn-plus disabled" type="button">+</button>
+    <!--awal form-->
+    <div>
+        <style>
+            .qty{
+                width:20%;
+                display:inline;
+            }
+        </style>
+    <div class="card-body">
+        <div class="form-group row pb-5">
+            <form class="row g-3 mt-3" wire:submit.prevent="submit">
+                <label for="inputEmail3" class="col-sm-2 col-form-label" style="color:black;padding-left:100px;"><strong>Jenis Tiket</strong></label>
+                <div class="col-sm-8">
+                    <select class="form-control" wire:model="kategori" required>
+                        <option>--Pilih Jenis Tiket--</option>
+                       @foreach ($kategoris as $kategori)
+                        <option value="{{ $kategori->id }}">{{$kategori->nama}}</option>
+                       @endforeach
+                    </select>
                 </div>
-            </div>
-            <div class="mb-3">
-                
-                <!-- kalkulasi harga -->
-                <p class="total-price">
-                    <label class="form-label" style="font-size:20pt;font-weight:bold;">Total</label>
-                    <span style="font-size:20pt;font-weight:bold;padding-left:520px;">Rp</span>
-                    <span id="price" style="font-size:20pt;font-weight:bold;">15000</span>
-                </p>
-            </div>
-            <!--<p class="card-text" style="font-weight:bold;">Total</p>-->
-        </div>
-    </div>
-    
-    <!--modal-->
-    <button type="button" class="btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Proses</button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Proses Transaksi</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form>
-            <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Masukkan Jumlah Uang yang Dibayar</label>
-                <input type="text" class="form-control" id="recipient-name">
-            </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-success w-100">Submit</button>
+                </div>
             </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn" style="background: #46BA98;color:white">Bayar</button>
-        </div>
+
+        @if (session()->has('message'))
+            <div class="alert alert-seccess">
+                {{session('message')}}
+            </div>
+        @endif
+
+        <div class="card-body border-top pb-5 p-0 mt-3">
+            <table class="table table-striped table-hover" style="background:grey;">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">qty</th>
+                        <th scope="col">Harga/qty</th>
+                        <th scope="col" style="width:200px;">Total</th>
+                        <th scope="col"style="width:10px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td>
+                            <div wire:ignore>
+                                <button class="button btn-minus disabled" type="button">-</button>
+                                <input class="inputt" type="text" id="quantity" readonly="" value="">
+                                <button class="button btn-plus disabled" type="button">+</button>
+                            </div>
+                        </td>
+                        <td>Rp </td>
+                        <td>Rp </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm "><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td></td>
+                    <td></td>
+                    <td></td> 
+                    <td style="text-align:right;">Total Pembelian</td>
+                    <td>
+                        Rp
+                    </td>
+                    <tr>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"></td>
+                        <td style="text-align:right;">Pembayaran</td>
+                        <td style="text-align:right;">
+                            <input type="number" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"></td>
+                        <td style="text-align:right;">Kembalian</td>
+                        <td style="text-align:leftt;">
+                        
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="">
+            <button class="btn btn-success btn-sm" style="float:right;width:100px;">Bayar</button>
+            </div>
         </div>
     </div>
     </div>
-
-    <script>
-    document.querySelector(".btn-minus").setAttribute("disabled","disabled");
-    //value incremenr decrement
-    var valueCount
-
-    //variable harga
-    var price = document.getElementById("price").innerText;
-
-    //function harga
-    function priceTotal(){
-        var total = valueCount * price;
-        document.getElementById("price").innerText = total;
-    }
-    
-    //plus button
-    document.querySelector(".btn-plus").addEventListener("click", function(){
-        valueCount=document.getElementById("quantity").value;
-    //input increment
-    valueCount++;
-    //setting increment input value
-    document.getElementById("quantity").value = valueCount;
-    
-    if (valueCount > 1 ){
-        document.querySelector(".btn-minus").removeAttribute("disabled")
-        document.querySelector(".btn-minus").classList.remove("disabled");
-    }
-
-    //memanggil fungsi
-    priceTotal()
-
-    });
-
-    //minus button
-    document.querySelector(".btn-minus").addEventListener("click", function(){
-        valueCount=document.getElementById("quantity").value;
-    //input decrement
-    valueCount--;
-    //setting decrement input value
-    document.getElementById("quantity").value = valueCount;
-
-    if(valueCount == 1){
-        document.querySelector(".btn-minus").setAttribute("disabled","disabled");
-    }
-
-    //memanggil fungsi
-    priceTotal()
-
-    });
-    </script>
-
-    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -176,10 +156,10 @@
   </body>
 </html>
 
-<!-- CSS -->
+<!-- CSS -- #46BA98-->
 <style type="text/css">
     .navbar-light{
-        background: #46BA98;
+        background: #212529;
     }
     .navbar-brand{
         padding-left:40px;
@@ -188,14 +168,7 @@
     }
     .navbar-toggler{
         margin-right:70px;
-    }
-    .card{
-        width: 50rem;
-        position: absolute;
-        left: 50%;
-        top: 45%;
-        transform: translate(-50%, -50%);
-        box-shadow: 1px 1px grey;
+        background: white;
     }
     .button{
      width:30px;
@@ -215,7 +188,7 @@
      box-shadow: inset 2px 2px 2px rgba(255,255,255,.1),
                  inset -2px -5px 15px rgba(0,0,0,.5);
  }
- .input{
+ .inputt{
     height:10px;
     border-radius: 3px;
     padding: 15px 0;
@@ -224,17 +197,18 @@
     margin: 0 10px;
     box-shadow: inset -2px -2px 2px rgba(255,255,255,.2);
  }
- .btn-modal{
-    position: absolute;
-    left: 50%;
-    top: 57%;
-    transform: translate(-50%, -50%);
-    width:800px;
-    background:#46BA98;
-    border:none;
-    box-shadow: 1px 1px grey;
-    color: white;
-    font-weight:bold;
-    font-size:20pt;
- }
+ .offcanvas-end{
+        width:300px;
+    }
+    .card-body{
+        margin:80px;
+        line-height:30px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        box shadow: inset -2px -2px 2px rgba(255,255,255,.2),
+                    inset 2px 5px 15px rgba(0,0,0,.5);
+    }
 </style>

@@ -35,7 +35,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                     <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
-                    <li><a class="dropdown-item" href="#">Keluar</a></li>
+                    <li><a class="dropdown-item" href="/login">Keluar</a></li>
                     </ul>
                 </li>
                 </ul>
@@ -50,14 +50,14 @@
         <div class="col-sm-6">
             <div class="card shadow-sm rounded">
             <div class="card-body">
-            <a href="#" class="nav-link" style="color:black;"><i class="fa fa-cart-plus" aria-hidden="true"></i><strong> Transaksi Hari Ini</strong></a>
+            <a href="#" class="nav-link" style="color:white;"><i class="fa fa-cart-plus" aria-hidden="true"></i><strong> Transaksi Hari Ini</strong></a>
             </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="card shadow-sm rounded">
             <div class="card-body">
-                <a href="#" class="nav-link" style="color:black;"><i class="fa fa-shopping-cart" aria-hidden="true"></i><strong> Transaksi Keseluruhan</strong></a>
+                <a href="/riwayat" class="nav-link" style="color:white;"><i class="fa fa-shopping-cart" aria-hidden="true"></i><strong> Transaksi Keseluruhan</strong></a>
             </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
 
 <style type="text/css">
     .navbar-light{
-        background: #46BA98;
+        background: #212529;
     }
     .navbar-brand{
         padding-left:40px;
@@ -91,10 +91,11 @@
     }
     .navbar-toggler{
         margin-right:70px;
+        background:white;
     }
     .card-body{
-        background:#DCDCDC;
-        box-shadow: 1px 1px 1px grey;
+        background:#46BA98;
+        box-shadow: 1px 1px 1px black;
     }
     .btn-secondary{
         width: 150px;
@@ -103,5 +104,8 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+    .offcanvas-end{
+        width:300px;
     }
 </style>

@@ -34,7 +34,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                         <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
-                        <li><a class="dropdown-item" href="#">Keluar</a></li>
+                        <li><a class="dropdown-item" href="/login">Keluar</a></li>
                         </ul>
                     </li>
                     </ul>
@@ -51,33 +51,117 @@
         top: 23%;
         transform: translate(-50%, -50%);">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" >
-            Weekend
+            Weekday
         </button>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item" href="/transaksi">Weekday</a></li>
+            <li><a class="dropdown-item" href="/transaksi2">Weekend</a></li>
         </ul>
     </div>
 
     <div class="card" >
         <div class="card-body">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Masukkan Jumlah Tiket</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                
+                <div class="quantity">
+                    <label class="form-label" style="font-size:20pt">Masukkan Jumlah Tiket</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="button btn-minus disabled" type="button">-</button>
+                    <input class="input" type="text" id="quantity" readonly="" value="1">
+                    <button class="button btn-plus disabled" type="button">+</button>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Weekend</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label" style="font-weight:bold;">Total</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+                <!-- kalkulasi harga -->
+                <p class="total-price">
+                    <label class="form-label" style="font-size:20pt;font-weight:bold;">Total</label>
+                    <span style="font-size:20pt;font-weight:bold;padding-left:520px;">Rp</span>
+                    <span id="price" style="font-size:20pt;font-weight:bold;">20000</span>
+                </p>
             </div>
             <!--<p class="card-text" style="font-weight:bold;">Total</p>-->
         </div>
-        <div class="card-footer">
-            <a href="#" class="nav-link" style="color:white;text-align:center;"><strong>Proses</strong></a>
+    </div>
+    
+    <!--modal-->
+    <button type="button" class="btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Proses</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Proses Transaksi</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Masukkan Jumlah Uang yang Dibayar</label>
+                <input type="text" class="form-control" id="recipient-name">
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn" style="background: #46BA98;color:white">Bayar</button>
+        </div>
         </div>
     </div>
+    </div>
+
+    <script>
+    document.querySelector(".btn-minus").setAttribute("disabled","disabled");
+    //value incremenr decrement
+    var valueCount
+
+    //variable harga
+    var price = document.getElementById("price").innerText;
+
+    //function harga
+    function priceTotal(){
+        var total = valueCount * price;
+        document.getElementById("price").innerText = total;
+    }
+    
+    //plus button
+    document.querySelector(".btn-plus").addEventListener("click", function(){
+        valueCount=document.getElementById("quantity").value;
+    //input increment
+    valueCount++;
+    //setting increment input value
+    document.getElementById("quantity").value = valueCount;
+    
+    if (valueCount > 1 ){
+        document.querySelector(".btn-minus").removeAttribute("disabled")
+        document.querySelector(".btn-minus").classList.remove("disabled");
+    }
+
+    //memanggil fungsi
+    priceTotal()
+
+    });
+
+    //minus button
+    document.querySelector(".btn-minus").addEventListener("click", function(){
+        valueCount=document.getElementById("quantity").value;
+    //input decrement
+    valueCount--;
+    //setting decrement input value
+    document.getElementById("quantity").value = valueCount;
+
+    if(valueCount == 1){
+        document.querySelector(".btn-minus").setAttribute("disabled","disabled");
+    }
+
+    //memanggil fungsi
+    priceTotal()
+
+    });
+    </script>
+
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -109,11 +193,51 @@
         width: 50rem;
         position: absolute;
         left: 50%;
-        top: 57%;
+        top: 45%;
         transform: translate(-50%, -50%);
         box-shadow: 1px 1px grey;
     }
-    .card-footer{
-        background:#46BA98;
+    .button{
+     width:30px;
+     height: 30px;
+     line-height:30px;
+     border-radius: 5px;
+     outline: none;
+     border: none;
+     color: white;
+     background: #46BA98;
+     cursor: pointer;
+     box shadow: inset -2px -2px 2px rgba(255,255,255,.2),
+                 inset 2px 5px 15px rgba(0,0,0,.5);
+    }
+ 
+ .button:active{
+     box-shadow: inset 2px 2px 2px rgba(255,255,255,.1),
+                 inset -2px -5px 15px rgba(0,0,0,.5);
+ }
+ .input{
+    height:10px;
+    border-radius: 3px;
+    padding: 15px 0;
+    width: 100px;
+    text-align: center;
+    margin: 0 10px;
+    box-shadow: inset -2px -2px 2px rgba(255,255,255,.2);
+ }
+ .btn-modal{
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+    width:800px;
+    background:#46BA98;
+    border:none;
+    box-shadow: 1px 1px grey;
+    color: white;
+    font-weight:bold;
+    font-size:20pt;
+ }
+ .offcanvas-end{
+        width:300px;
     }
 </style>

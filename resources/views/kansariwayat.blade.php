@@ -27,19 +27,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/bkasir">Beranda</a>
                 </li>
-                <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/transaksi">Transaksi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Riwayat Transaksi</a>
-                    </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Akun
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                     <li><a class="dropdown-item" href="#">Pengaturan Akun</a></li>
-                    <li><a class="dropdown-item" href="#">Keluar</a></li>
+                    <li><a class="dropdown-item" href="/login">Keluar</a></li>
                     </ul>
                 </li>
                 </ul>
@@ -56,7 +50,7 @@
          <div class="card-body">
             <div class="input-group mb-3">
                 <label for="label">Cari Berdasar Tanggal</label>
-                <input type="date" name="" id="" class="form-cotrol"/>
+                <input type="date" style="margin-left:5px;" name="" id="" class="form-cotrol"/>
             </div>
          </div>
          <div class="row">
@@ -106,7 +100,7 @@
 
 <style type="text/css">
     .navbar-light{
-        background: #46BA98;
+        background: #212529;
     }
     .navbar-brand{
         padding-left:40px;
@@ -115,6 +109,7 @@
     }
     .navbar-toggler{
         margin-right:70px;
+        background:white;
     }
     .col-md-4{
         margin-top:100px;
@@ -123,6 +118,9 @@
     }
     .col-md-8{
         margin-top:100px;
+    }
+    .offcanvas-end{
+        width:300px;
     }
 
 </style>
