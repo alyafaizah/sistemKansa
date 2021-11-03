@@ -17,7 +17,7 @@ class CreateTransaksisTable extends Migration
             $table->id();
             $table->integer('kategori_id');
             $table->integer('qty');
-            $table->string('total');
+            $table->integer('total')->nullable();
             $table->timestamps();
         });
     }

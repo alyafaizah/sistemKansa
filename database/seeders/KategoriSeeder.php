@@ -16,10 +16,12 @@ class KategoriSeeder extends Seeder
         //
         $kategoris=[
             [
+                'id'=>3,
                 'nama'=>'Weekday',
                 'harga'=>15000,
             ],
             [
+                'id'=>5,
                 'nama'=>'Weekend',
                 'harga'=>20000,
             ],

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use App\Models\Transaksi;
 
 class TiketController extends Controller
 {
@@ -12,6 +13,26 @@ class TiketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function kansatransaksi(){
+        //$kategoris=Kategori::orderBY('id','asc')->get();
+        //return view('kansatransaksi');
+        return view('kansatransaksi',[
+         'kategoris'=>Kategori::orderBY('nama','asc')->get(),
+        ]);
+    }
+
+    //public $kategori;
+    //public function submit(){
+      //  $transaksi = Transaksi::create([
+        //    'kategori_id' => $this->kategori_id,
+          //  'qty' => 1,
+            //'total' => DB::table('kategoris')->where('id' , $this->kategori_id)->value('harga')
+        //]);
+        //$transaksi->total = $transaksi->kategori->harga;
+        //$transaksi->save();
+    //}
+
     public function index()
     {
         //
