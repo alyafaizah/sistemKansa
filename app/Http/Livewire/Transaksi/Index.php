@@ -73,7 +73,7 @@ class Index extends Component
         $transaksi = Transaksi::get();
          
         $order = Order::create([
-            'no_order' => 'KNS-' . date('Ymd') . rand(1111, 9999),
+            'no_order' => 'KNS-' . date('YmdHis'),
             'nama_kasir' => auth()->user()->name,
             'grand_total' => $transaksi->sum('total'),
             'pembayaran' => $this->pembayaran,
