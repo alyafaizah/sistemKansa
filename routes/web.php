@@ -34,10 +34,15 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+    //transaksi
     Route::get('/transaksi', [BodyController::class, 'index'])->name('transaksi');
+    Route::get('/detail/{no_order}', [BodyController::class, 'detailtransaksi'])->name('detailtransaksi');
+    //riwayat
     Route::get('/riwayat', [BodyController::class, 'riwayat'])->name('invoice');
     Route::get('/filterriwayat/periode', [BodyController::class, 'periode']);
-    Route::get('/detail/{no_order}', [BodyController::class, 'detailtransaksi'])->name('detailtransaksi');
+    //laporan keuangan
+    Route::get('/laporan', [BodyController::class, 'keuangan'])->name('laporan');
+    //role
     Route::get('redirects','App\Http\Controllers\BodyController@role');
 });
 

@@ -50,6 +50,11 @@ class BodyController extends Controller
     {
         return view('invoice.riwayat');
     }
+
+    public function keuangan()
+    {
+        return view('laporan.keuangan');
+    }
     
     public function periode(Request $request){
         $tanggal_awal=$request->tanggal_awal;
@@ -65,7 +70,7 @@ class BodyController extends Controller
         $role=Auth::user()->role;
 
         if($role=='1'){
-            return view('dashboard');
+            return view('invoice.riwayat');
         }
         else{
             return view('transaksi.index');

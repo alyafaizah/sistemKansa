@@ -12,12 +12,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                
+                @if(Auth::user()->role=='1')
+                    <x-jet-nav-link href="{{ route('invoice') }}" :active="request()->routeIs('invoice')">
+                        {{ __('Riwayat') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('laporan') }}" :active="request()->routeIs('laporan')">
+                        {{ __('Laporan') }}
+                    </x-jet-nav-link>
+                @endif
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                @if(Auth::user()->role=='0')
                     <x-jet-nav-link href="{{ route('transaksi') }}" :active="request()->routeIs('transaksi')">
                         {{ __('Transaksi') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('invoice') }}" :active="request()->routeIs('invoice')">
                         {{ __('Riwayat') }}
                     </x-jet-nav-link>
+                @endif
                 </div>
             </div>
 

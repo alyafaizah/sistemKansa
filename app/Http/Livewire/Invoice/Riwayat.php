@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Invoice;
 
 use Livewire\Component;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class Riwayat extends Component
 {
