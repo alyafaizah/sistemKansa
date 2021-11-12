@@ -16,7 +16,7 @@ class Keuangan extends Component
             \DB::raw('DATE(created_at) as tanggal')
         ])
         ->groupBy('tanggal')
-        ->whereRaw('DATE(created_at)>=?',[date('Y-m-d',strtotime('-7 days'))])
+        ->whereRaw('DATE(created_at)>=?',[date('Y-m-d',strtotime('-30 days'))])
         ->orderBy('tanggal','asc')
         ->get()
         ->toArray();

@@ -13,6 +13,7 @@
                     <button type="submit" class="btn btn-success" wire:click="cari">Cari</button>
                 </div>
             </form>
+            <a href="/export" class="btn btn-warning">Cetak Excel</a>
             <div class="table-responsive" style="padding:20px;">
                 <table id="table-pemasukan" class="table align-items-center table-flush">
                     <thead class="thead-light">
