@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
-use App\Models\Transaksi;
 
 class TiketController extends Controller
 {
@@ -13,29 +12,13 @@ class TiketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function kansatransaksi(){
-        //$kategoris=Kategori::orderBY('id','asc')->get();
-        //return view('kansatransaksi');
-        return view('kansatransaksi',[
-         'kategoris'=>Kategori::orderBY('nama','asc')->get(),
-        ]);
-    }
-
-    //public $kategori;
-    //public function submit(){
-      //  $transaksi = Transaksi::create([
-        //    'kategori_id' => $this->kategori_id,
-          //  'qty' => 1,
-            //'total' => DB::table('kategoris')->where('id' , $this->kategori_id)->value('harga')
-        //]);
-        //$transaksi->total = $transaksi->kategori->harga;
-        //$transaksi->save();
-    //}
-
     public function index()
     {
-        //
+        $datas = Kategori::all();
+
+        return view('tiket.kelolatiket', compact(
+            'datas'
+        ));
     }
 
     /**
@@ -45,7 +28,11 @@ class TiketController extends Controller
      */
     public function create()
     {
-        //
+        $model = new Kategori;
+
+        return view('tiket.create', compact(
+            'model'
+        ));
     }
 
     /**
@@ -56,7 +43,13 @@ class TiketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Kategori;
+        $model->nama = $request->nama;
+        $model->harga = $request->harga;
+
+        $model->save();
+
+        return redirect('tiket');
     }
 
     /**
@@ -78,7 +71,11 @@ class TiketController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Kategori::find($id);
+
+        return view('tiket.edit', compact(
+            'model'
+        ));
     }
 
     /**
@@ -90,7 +87,13 @@ class TiketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Kategori::find($id);
+        $model->nama = $request->nama;
+        $model->harga = $request->harga;
+
+        $model->save();
+
+        return redirect('tiket');
     }
 
     /**
@@ -101,6 +104,11 @@ class TiketController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model=Kategori::find($id);
+        $model->delete();
+        session()->flash('message', 'Tiket berhasil di hapus');
+        
+        return redirect('tiket');
+        
     }
 }

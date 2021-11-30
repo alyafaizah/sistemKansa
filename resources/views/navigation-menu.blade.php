@@ -20,6 +20,9 @@
                     <x-jet-nav-link href="{{ route('laporan') }}" :active="request()->routeIs('laporan')">
                         {{ __('Laporan') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="tiket" :active="request()->routeIs('kelola')">
+                        {{ __('Kelola Tiket') }}
+                    </x-jet-nav-link>
                 @endif
                 </div>
 

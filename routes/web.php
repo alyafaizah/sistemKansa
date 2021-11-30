@@ -44,5 +44,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/laporan', [BodyController::class, 'keuangan'])->name('laporan');
     //role
     Route::get('redirects','App\Http\Controllers\BodyController@role');
+    //kelola tiket
+    Route::resource('tiket', TiketController::class);
 });
 
