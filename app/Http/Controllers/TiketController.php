@@ -48,6 +48,7 @@ class TiketController extends Controller
         $model->harga = $request->harga;
 
         $model->save();
+        session()->flash('message', 'Tiket berhasil ditambah');
 
         return redirect('tiket');
     }
@@ -93,6 +94,7 @@ class TiketController extends Controller
 
         $model->save();
 
+        session()->flash('message', 'Tiket berhasil diedit');
         return redirect('tiket');
     }
 
@@ -106,7 +108,7 @@ class TiketController extends Controller
     {
         $model=Kategori::find($id);
         $model->delete();
-        session()->flash('message', 'Tiket berhasil di hapus');
+        session()->flash('message', 'Tiket berhasil dihapus');
         
         return redirect('tiket');
         

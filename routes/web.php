@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/filterriwayat/periode', [BodyController::class, 'periode']);
     //laporan keuangan
     Route::get('/laporan', [BodyController::class, 'keuangan'])->name('laporan');
+    //cetak laporan
+    Route::get('/cetakpdf', [BodyController::class, 'cetakpdf'])->name('cetakpdf');
     //role
     Route::get('redirects','App\Http\Controllers\BodyController@role');
     //kelola tiket

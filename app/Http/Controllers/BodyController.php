@@ -9,30 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class BodyController extends Controller
 {
-    //
-    public function kansalogin()
-    {
-        return view('kansalogin');
-    }
-
-    public function kansaberandakasir()
-    {
-        return view('kansaberandakasir');
-    }
-
-    public function kansatransaksi2()
-    {
-        return view('kansatransaksi2');
-    }
-
-    public function test()
-    {
-        return view('test');
-    }
-    public function kansariwayat()
-    {
-        return view('kansariwayat');
-    }
+    // public function test()
+    // {
+    //     return view('test');
+    // }
+    // public function kansariwayat()
+    // {
+    //     return view('kansariwayat');
+    // }
 
     public function index()
     {
@@ -55,24 +39,42 @@ class BodyController extends Controller
     {
         return view('laporan.keuangan');
     }
-    
-    public function periode(Request $request){
-        $tanggal_awal=$request->tanggal_awal;
-        $tanggal_akhir=$request->tanggal_akhir;
 
-        $title="Filter riwayat transaksi dari $tanggal_awal sampai $tanggal_akhir";
-        $data = Order::where('created_at','>=',$tanggal_awal)->where('created_at','<=',$tanggal_akhir)->get();
-        
-        return view('invoice.filterriwayat',compact('title','data'));
+    public function cetakpdf()
+    {
+        $cetakpdf = Order::get();
+        $cetakpdf = \DB::table('orders')->select([
+            \DB::raw('count(*) as jumlah'),
+            \DB::raw('sum(grand_total) as pemasukan'),
+            \DB::raw('DATE(created_at) as tanggal')
+        ])
+            ->groupBy('tanggal')
+            ->whereRaw('DATE(created_at)>=?', [date('Y-m-d', strtotime('-30 days'))])
+            ->orderBy('tanggal', 'asc')
+            ->get()
+            ->toArray();
+
+        return view('laporan.cetakpdf', compact('cetakpdf'));
     }
 
-    public function role(){
-        $role=Auth::user()->role;
+    public function periode(Request $request)
+    {
+        $tanggal_awal = $request->tanggal_awal;
+        $tanggal_akhir = $request->tanggal_akhir;
 
-        if($role=='1'){
+        $title = "Filter riwayat transaksi dari $tanggal_awal sampai $tanggal_akhir";
+        $data = Order::where('created_at', '>=', $tanggal_awal)->where('created_at', '<=', $tanggal_akhir)->get();
+
+        return view('invoice.filterriwayat', compact('title', 'data'));
+    }
+
+    public function role()
+    {
+        $role = Auth::user()->role;
+
+        if ($role == '1') {
             return view('invoice.riwayat');
-        }
-        else{
+        } else {
             return view('transaksi.index');
         }
     }
